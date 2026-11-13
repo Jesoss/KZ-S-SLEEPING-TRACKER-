@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d19">
-<title>KZ — Sleep Intelligence</title>
-<style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080d19"><title>NOCTURNE</title><style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#080d19;--panel:#101a2b;--panel2:#121f33;--line:#263750;--muted:#91a4bf;--text:#edf5ff;--cyan:#61e7f5;--blue:#759bff;--violet:#b18cff;--green:#78e6b0;--amber:#ffc978}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#142747 0,transparent 38%),radial-gradient(ellipse at 90% 20%,#1d1740 0,transparent 30%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;min-height:100vh}
@@ -18,15 +11,12 @@
 .log-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}.log{margin-top:14px}.entry{display:grid;grid-template-columns:1.1fr 1fr 1fr auto;gap:10px;padding:13px 4px;border-bottom:1px solid #22334a;font-size:12px;align-items:center}.entry span{color:var(--muted)}.delete{background:none;border:0;color:#ff8e9d;cursor:pointer;font-size:17px}.empty{color:var(--muted);font-size:12px;padding:20px 4px;text-align:center}
 .note{border:1px solid #39405e;background:#171a30;border-radius:15px;padding:16px;color:#b7c3dc;font-size:11px;line-height:1.7;margin-top:18px}.note strong{color:var(--text)}footer{text-align:center;color:#637995;font:10px 'DM Mono';margin-top:30px;letter-spacing:.1em}
 @media(max-width:760px){.hero{grid-template-columns:1fr}.grid,.controls{grid-template-columns:1fr}.log-form{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:1fr 1fr 1fr}.panel{padding:19px}.entry{grid-template-columns:1fr 1fr auto}.entry span:nth-child(3){display:none}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<header class="top">
- <div class="brand"><div class="logo">☾</div><div><div class="eyebrow">Personal sleep intelligence</div><h1>CHENG</h1></div></div>
- <div class="live">SYSTEM ONLINE</div>
-</header>
-<section class="hero">
+
+.auth-panel{margin-bottom:18px}.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px}.auth-panel input{width:100%;background:#0a1423;border:1px solid #30445f;border-radius:11px;padding:13px;color:var(--text);font:14px 'DM Mono';outline:none}.auth-panel input:focus{border-color:var(--cyan)}.remember-row{display:flex;align-items:flex-start;gap:10px;margin-top:13px;color:var(--text);font-size:12px;cursor:pointer}.remember-row input{width:16px;height:16px;margin:1px 0 0;accent-color:var(--cyan)}.remember-row span{display:grid;gap:3px}.remember-row small{color:var(--muted);font-size:10px;line-height:1.5}.auth-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}.auth-status{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}.user-chip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--muted)}.user-chip code{color:var(--cyan);overflow-wrap:anywhere}.sync{font:10px 'DM Mono';color:var(--green);letter-spacing:.08em}.hidden{display:none!important}
+@media(max-width:760px){.auth-grid{grid-template-columns:1fr}}
+
+.authbox{max-width:560px;margin:8vh auto}.field{margin:12px 0}.field input{width:100%;background:#0a1423;border:1px solid #30445f;border-radius:11px;padding:13px;color:var(--text);font:14px 'DM Mono'}.remember{display:flex;gap:9px;align-items:center;color:var(--muted);font-size:12px;margin:14px 0}.status{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}.toplinks{display:flex;gap:12px;flex-wrap:wrap}.toplinks a{color:var(--cyan);font-size:12px} .adminrow{padding:14px 4px;border-bottom:1px solid #22334a;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+</style></head><body><div class="wrap"><header class="top"><div class="brand"><div class="logo">☾</div><div><div class="eyebrow">Personal sleep intelligence</div><h1>NOCTURNE</h1></div></div><div class="live">SYSTEM ONLINE</div></header><div class="toplinks"><a href="login.html" id="logout">Sign out</a></div><section class="hero">
  <div class="panel hero-main"><div class="kicker">Your nightly reset</div><h2>Make room for a <span>better tomorrow.</span></h2><div class="sub">Set the time you need to wake up. Uno calculates suggested bedtimes, tracks your sleep, and helps you build a more consistent routine.</div></div>
  <div class="panel"><div class="kicker">Local time · Philippines</div><div class="clock" id="clock">--:--:--</div><div class="date" id="today">Loading date…</div><div class="section-title" style="margin-top:27px"><h3>Tonight's target</h3><span id="targetStatus">AWAITING INPUT</span></div><div class="sub" id="recommendation">Enter your wake-up time to see your sleep schedule.</div></div>
 </section>
@@ -57,26 +47,27 @@
   <div class="field"><label for="sleepEnd">Wake-up time</label><input type="time" id="sleepEnd"></div>
   <button class="btn" id="save">Save session</button>
  </div>
- <div class="hint">Enter the actual times. The tracker calculates duration, including sessions that cross midnight. Data is saved in this browser on this device.</div>
+ <div class="hint">Enter the actual times. Sessions are saved to your signed-in account in the cloud, with a unique session ID and the device ID that submitted them.</div>
  <div class="log" id="log"><div class="empty">No sleep sessions yet. Add your first night above.</div></div>
 </section>
 <div class="note"><strong>Sleep-health note:</strong> These are planning targets, not a medical assessment. Six hours is below the usual recommendation for most adults; adults are generally advised to get at least 7 hours regularly. If she is a teenager, the recommended amount is typically 8–10 hours. The calculator includes the selected time-to-fall-asleep estimate so the bedtime is earlier than the intended sleep start.</div>
-<footer>CHENG // SLEEP INTELLIGENCE SYSTEM · DATA STAYS ON THIS DEVICE</footer>
+<footer>KZ // SLEEP INTELLIGENCE SYSTEM · SECURE CLOUD SYNC</footer>
 </div>
-<script>
-const $=id=>document.getElementById(id);
-const pad=n=>String(n).padStart(2,'0');
-function fmt(mins){mins=((mins%1440)+1440)%1440;let h=Math.floor(mins/60),m=mins%60;return `${pad((h%12)||12)}:${pad(m)} ${h<12?'AM':'PM'}`;}
-function minutes(v){if(!v)return 0;let [h,m]=v.split(':').map(Number);return h*60+m;}
-function updateClock(){let d=new Date();$('clock').textContent=d.toLocaleTimeString('en-PH',{hour12:false});$('today').textContent=d.toLocaleDateString('en-PH',{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
-function calc(){let wake=$('wake').value;if(!wake)return;let w=minutes(wake),lat=Number($('latency').value);[6,7].forEach(hr=>{let bed=w-hr*60-lat;$('bed'+hr).textContent=fmt(bed);$('detail'+hr).textContent=`Sleep starts around ${fmt(bed+lat)} · Wake ${fmt(w)}`;$('fill'+hr).style.width='100%';});$('targetStatus').textContent='SCHEDULE READY';$('recommendation').textContent=`For a ${fmt(w)} wake-up, aim to get into bed by ${fmt(w-7*60-lat)} for 7 hours of sleep. Allow about ${lat} minutes to fall asleep.`;}
-$('calculate').addEventListener('click',calc);$('wake').addEventListener('change',calc);$('latency').addEventListener('change',calc);
-$('nowWake').addEventListener('click',()=>{let d=new Date(Date.now()+8*3600000);$('wake').value=`${pad(d.getHours())}:${pad(d.getMinutes())}`;calc();});
-const KEY='nocturne-sleep-log-v1';let records=[];try{records=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
-function persist(){localStorage.setItem(KEY,JSON.stringify(records));render();}
-function render(){let total=records.length,mins=records.reduce((s,r)=>s+r.duration,0);$('sessions').textContent=total;$('average').textContent=total?`${Math.floor(mins/total/60)}h ${Math.round(mins/total%60)}m`:'—';$('hits').textContent=total?`${Math.round(records.filter(r=>r.duration>=420).length/total*100)}%`:'0%';let log=$('log');if(!total){log.innerHTML='<div class="empty">No sleep sessions yet. Add your first night above.</div>';return;}log.innerHTML=records.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<div class="entry"><strong>${new Date(r.date+'T12:00:00').toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'})}</strong><span>${r.start} → ${r.end}</span><strong>${Math.floor(r.duration/60)}h ${r.duration%60}m</strong><button class="delete" data-id="${r.id}" aria-label="Delete session">×</button></div>`).join('');log.querySelectorAll('.delete').forEach(b=>b.addEventListener('click',()=>{records=records.filter(r=>r.id!==b.dataset.id);persist();}));}
-$('save').addEventListener('click',()=>{let date=$('sleepDate').value,start=$('sleepStart').value,end=$('sleepEnd').value;if(!date||!start||!end){alert('Please enter the date, bedtime, and wake-up time.');return;}let a=minutes(start),b=minutes(end);if(b<=a)b+=1440;let duration=b-a;if(duration>20*60){alert('That session is over 20 hours. Please check the times.');return;}records.push({id:Date.now().toString(),date,start:fmt(a),end:fmt(b),duration});persist();});
-let today=new Date();$('sleepDate').value=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;updateClock();setInterval(updateClock,1000);calc();render();
-</script>
-</body>
-</html>
+</div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>const SUPABASE_URL='https://dehuhtnbjafzqdwfodgm.supabase.co'; const SUPABASE_ANON_KEY='sb_publishable_KnfxP9_I0t2tDlOSVzpypQ_FTYtsKss';
+const $=id=>document.getElementById(id); const configured=()=>SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&SUPABASE_ANON_KEY.length>20&&!SUPABASE_ANON_KEY.includes('YOUR_');
+const remember=localStorage.getItem('nocturne-remember')!=='false';
+const storage=remember?localStorage:sessionStorage;
+const db=window.supabase?.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const deviceKey='nocturne-device-id'; let deviceId=localStorage.getItem(deviceKey); if(!deviceId){deviceId=crypto.randomUUID();localStorage.setItem(deviceKey,deviceId)}
+async function roleOf(user){const {data,error}=await db.from('admin_users').select('user_id').eq('user_id',user.id).maybeSingle();if(error)throw error;return !!data;}
+
+const pad=n=>String(n).padStart(2,'0');const mins=v=>{if(!v)return 0;let [h,m]=v.split(':').map(Number);return h*60+m};const fmt=n=>{n=(n%1440+1440)%1440;let h=Math.floor(n/60);return `${String((h%12)||12).padStart(2,'0')}:${String(n%60).padStart(2,'0')} ${h<12?'AM':'PM'}`};
+let user=null,records=[];function msg(t){let el=document.getElementById('syncStatus');if(el)el.textContent=t}
+function calc(){let v=$('wake').value;if(!v)return;let w=mins(v),lat=Number($('latency').value);[6,7].forEach(h=>{$('bed'+h).textContent=fmt(w-h*60-lat);$('detail'+h).textContent=`Sleep starts around ${fmt(w-h*60)} · Wake ${fmt(w)}`;$('fill'+h).style.width='100%' });$('targetStatus').textContent='SCHEDULE READY';$('recommendation').textContent=`For a ${fmt(w)} wake-up, aim to get into bed by ${fmt(w-420-lat)} for 7 hours of sleep.`}
+$('calculate').onclick=calc;$('wake').onchange=calc;$('latency').onchange=calc;$('nowWake').onclick=()=>{let d=new Date();$('wake').value=pad(d.getHours())+':'+pad(d.getMinutes());calc()};
+function render(){let total=records.length,mm=records.reduce((s,r)=>s+r.duration_minutes,0);$('sessions').textContent=total;$('average').textContent=total?`${Math.floor(mm/total/60)}h ${Math.round(mm/total%60)}m`:'—';$('hits').textContent=total?Math.round(records.filter(r=>r.duration_minutes>=420).length/total*100)+'%':'0%';$('log').innerHTML=records.length?records.map(r=>`<div class="entry"><strong>${r.sleep_date}</strong><span>${r.bedtime.slice(0,5)} → ${r.wake_time.slice(0,5)}</span><strong>${Math.floor(r.duration_minutes/60)}h ${r.duration_minutes%60}m</strong><span>${r.id.slice(0,8)}</span></div>`).join(''):'<div class="empty">No sleep sessions yet.</div>'}
+async function load(){const {data,error}=await db.from('sleep_sessions').select('id,sleep_date,bedtime,wake_time,duration_minutes').eq('user_id',user.id).order('sleep_date',{ascending:false});if(error){msg('SYNC ERROR');alert(error.message);return}records=data||[];render();msg('CLOUD SYNCED')}
+$('save').onclick=async()=>{let date=$('sleepDate').value,start=$('sleepStart').value,end=$('sleepEnd').value;if(!date||!start||!end)return alert('Enter date, bedtime and wake-up time.');let a=mins(start),b=mins(end);if(b<=a)b+=1440;let duration=b-a;if(duration<=0||duration>1200)return alert('Please check the sleep times.');const {error}=await db.from('sleep_sessions').insert({user_id:user.id,submitted_by_email:user.email,sleep_date:date,bedtime:start,wake_time:end,duration_minutes:duration,source_device_id:deviceId,source_user_agent:navigator.userAgent,source_url:location.href});if(error)return alert(error.message);$('sleepStart').value='';$('sleepEnd').value='';await load();alert('Sleep session saved.')};
+$('logout').onclick=async e=>{e.preventDefault();await db.auth.signOut();location.href='login.html'};
+(async()=>{if(!configured()||!db){location.href='login.html';return}const {data}=await db.auth.getSession();if(!data.session){location.href='login.html';return}user=data.session.user;try{if(await roleOf(user)){location.href='admin.html';return}}catch(e){alert(e.message);return}let d=new Date();$('sleepDate').value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());$('clock').textContent=d.toLocaleTimeString('en-PH',{hour12:false});$('today').textContent=d.toLocaleDateString('en-PH',{weekday:'long',year:'numeric',month:'long',day:'numeric'});calc();await load();setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString('en-PH',{hour12:false})},1000)})();
+</script></body></html>
